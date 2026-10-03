@@ -1,0 +1,16 @@
+services:
+  reclaim-os:
+    build: .
+    image: reclaim-os:demo
+    ports:
+      - "8000:8000"
+    environment:
+      AI_MODE: ${AI_MODE:-demo}
+      DATABASE_URL: sqlite:////app/data/reclaim.db
+      ALLOWED_ORIGINS: ${ALLOWED_ORIGINS:-http://localhost:8000}
+    volumes:
+      - reclaim-data:/app/data
+    restart: unless-stopped
+
+volumes:
+  reclaim-data:
